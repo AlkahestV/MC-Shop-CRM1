@@ -40,22 +40,38 @@ export default function LoginPage() {
   }
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900">
-      <div className="w-full max-w-md p-8 space-y-8 bg-white rounded-2xl shadow-2xl">
-        <div className="text-center">
-          <h1 className="text-4xl font-bold text-slate-900 mb-2">Motorshop CRM</h1>
-          <p className="text-slate-600">Sign in to your account</p>
+    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-avmoto-gray-dark via-avmoto-gray to-avmoto-gray-dark">
+      {/* Decorative Elements */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        <div className="absolute -top-40 -right-40 w-80 h-80 bg-avmoto-blue opacity-10 rounded-full blur-3xl"></div>
+        <div className="absolute -bottom-40 -left-40 w-80 h-80 bg-avmoto-blue opacity-10 rounded-full blur-3xl"></div>
+      </div>
+
+      <div className="relative w-full max-w-md p-8 space-y-8 bg-white rounded-2xl shadow-2xl">
+        {/* Logo/Brand */}
+        <div className="text-center space-y-2">
+          <div className="flex items-center justify-center mb-4">
+            <div className="w-16 h-16 bg-gradient-to-br from-avmoto-blue to-avmoto-blue-dark rounded-xl flex items-center justify-center shadow-lg">
+              <svg className="w-10 h-10 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
+              </svg>
+            </div>
+          </div>
+          <h1 className="text-4xl font-bold bg-gradient-to-r from-avmoto-blue to-avmoto-blue-dark bg-clip-text text-transparent">
+            AVMOTO CRM
+          </h1>
+          <p className="text-avmoto-gray-light font-medium">Suspension Engineering</p>
         </div>
 
         <form onSubmit={handleLogin} className="space-y-6">
           {error && (
-            <div className="p-4 bg-red-50 border border-red-200 rounded-lg">
-              <p className="text-sm text-red-800">{error}</p>
+            <div className="p-4 bg-red-50 border-l-4 border-red-500 rounded-lg">
+              <p className="text-sm text-red-800 font-medium">{error}</p>
             </div>
           )}
 
           <div>
-            <label htmlFor="email" className="block text-sm font-medium text-slate-700 mb-2">
+            <label htmlFor="email" className="block text-sm font-semibold text-avmoto-gray mb-2">
               Email Address
             </label>
             <input
@@ -64,13 +80,13 @@ export default function LoginPage() {
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               required
-              className="w-full px-4 py-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all outline-none"
+              className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-avmoto-blue focus:border-avmoto-blue transition-all outline-none"
               placeholder="you@example.com"
             />
           </div>
 
           <div>
-            <label htmlFor="password" className="block text-sm font-medium text-slate-700 mb-2">
+            <label htmlFor="password" className="block text-sm font-semibold text-avmoto-gray mb-2">
               Password
             </label>
             <input
@@ -79,7 +95,7 @@ export default function LoginPage() {
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               required
-              className="w-full px-4 py-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all outline-none"
+              className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-avmoto-blue focus:border-avmoto-blue transition-all outline-none"
               placeholder="••••••••"
             />
           </div>
@@ -87,14 +103,24 @@ export default function LoginPage() {
           <button
             type="submit"
             disabled={loading}
-            className="w-full py-3 px-4 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-lg transition-colors disabled:bg-slate-400 disabled:cursor-not-allowed"
+            className="w-full py-3 px-4 bg-gradient-to-r from-avmoto-blue to-avmoto-blue-dark hover:from-avmoto-blue-hover hover:to-avmoto-blue text-white font-bold rounded-xl transition-all transform hover:scale-[1.02] active:scale-[0.98] disabled:bg-gray-400 disabled:cursor-not-allowed disabled:transform-none shadow-lg shadow-avmoto-blue/30"
           >
-            {loading ? 'Signing in...' : 'Sign In'}
+            {loading ? (
+              <span className="flex items-center justify-center gap-2">
+                <svg className="animate-spin h-5 w-5" viewBox="0 0 24 24">
+                  <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" fill="none"></circle>
+                  <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                </svg>
+                Signing in...
+              </span>
+            ) : (
+              'Sign In'
+            )}
           </button>
         </form>
 
-        <div className="text-center text-sm text-slate-600">
-          <p>© 2025 Motorshop CRM. All rights reserved.</p>
+        <div className="text-center text-sm text-avmoto-gray-light">
+          <p>© 2025 AVMOTO Tuning. All rights reserved.</p>
         </div>
       </div>
     </div>

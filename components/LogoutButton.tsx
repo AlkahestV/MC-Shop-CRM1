@@ -2,6 +2,7 @@
 
 import { createClient } from '@/lib/supabase/client'
 import { useRouter } from 'next/navigation'
+import { motion } from 'framer-motion'
 
 export default function LogoutButton() {
   const router = useRouter()
@@ -14,12 +15,14 @@ export default function LogoutButton() {
   }
 
   return (
-    <button
+    <motion.button
+      whileHover={{ scale: 1.05 }}
+      whileTap={{ scale: 0.95 }}
       onClick={handleLogout}
-      className="px-4 py-2 bg-slate-600 hover:bg-slate-700 text-white text-sm font-medium rounded-lg transition-colors"
+      className="px-4 py-2 bg-gradient-to-r from-avmoto-gray to-avmoto-gray-dark hover:from-avmoto-gray-dark hover:to-avmoto-gray text-white text-sm font-bold rounded-lg transition-all shadow-lg"
     >
       Sign Out
-    </button>
+    </motion.button>
   )
 }
 
