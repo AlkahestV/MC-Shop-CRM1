@@ -154,7 +154,7 @@ export default function NewCustomerPage() {
                   value={firstName}
                   onChange={(e) => setFirstName(e.target.value)}
                   required
-                  className="w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none"
+                  className="w-full px-4 py-2 border-2 border-gray-200 rounded-lg focus:ring-2 focus:ring-avmoto-blue focus:border-avmoto-blue outline-none text-avmoto-gray font-medium placeholder:text-gray-400"
                 />
               </div>
 
@@ -167,7 +167,7 @@ export default function NewCustomerPage() {
                   value={lastName}
                   onChange={(e) => setLastName(e.target.value)}
                   required
-                  className="w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none"
+                  className="w-full px-4 py-2 border-2 border-gray-200 rounded-lg focus:ring-2 focus:ring-avmoto-blue focus:border-avmoto-blue outline-none text-avmoto-gray font-medium placeholder:text-gray-400"
                 />
               </div>
 
@@ -180,7 +180,7 @@ export default function NewCustomerPage() {
                   value={middleInitial}
                   onChange={(e) => setMiddleInitial(e.target.value.slice(0, 1))}
                   maxLength={1}
-                  className="w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none"
+                  className="w-full px-4 py-2 border-2 border-gray-200 rounded-lg focus:ring-2 focus:ring-avmoto-blue focus:border-avmoto-blue outline-none text-avmoto-gray font-medium placeholder:text-gray-400"
                 />
               </div>
 
@@ -193,7 +193,7 @@ export default function NewCustomerPage() {
                   value={phoneNumber}
                   onChange={(e) => setPhoneNumber(e.target.value)}
                   required
-                  className="w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none"
+                  className="w-full px-4 py-2 border-2 border-gray-200 rounded-lg focus:ring-2 focus:ring-avmoto-blue focus:border-avmoto-blue outline-none text-avmoto-gray font-medium placeholder:text-gray-400"
                 />
               </div>
 
@@ -206,7 +206,7 @@ export default function NewCustomerPage() {
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   required
-                  className="w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none"
+                  className="w-full px-4 py-2 border-2 border-gray-200 rounded-lg focus:ring-2 focus:ring-avmoto-blue focus:border-avmoto-blue outline-none text-avmoto-gray font-medium placeholder:text-gray-400"
                 />
               </div>
 
@@ -219,7 +219,7 @@ export default function NewCustomerPage() {
                   onChange={(e) => setAddress(e.target.value)}
                   required
                   rows={3}
-                  className="w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none"
+                  className="w-full px-4 py-2 border-2 border-gray-200 rounded-lg focus:ring-2 focus:ring-avmoto-blue focus:border-avmoto-blue outline-none text-avmoto-gray font-medium placeholder:text-gray-400"
                 />
               </div>
             </div>
@@ -262,7 +262,7 @@ export default function NewCustomerPage() {
                       type="text"
                       value={unit.brand}
                       onChange={(e) => updateUnit(index, 'brand', e.target.value)}
-                      className="w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none"
+                      className="w-full px-4 py-2 border-2 border-gray-200 rounded-lg focus:ring-2 focus:ring-avmoto-blue focus:border-avmoto-blue outline-none text-avmoto-gray font-medium placeholder:text-gray-400"
                     />
                   </div>
 
@@ -274,7 +274,7 @@ export default function NewCustomerPage() {
                       type="text"
                       value={unit.model}
                       onChange={(e) => updateUnit(index, 'model', e.target.value)}
-                      className="w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none"
+                      className="w-full px-4 py-2 border-2 border-gray-200 rounded-lg focus:ring-2 focus:ring-avmoto-blue focus:border-avmoto-blue outline-none text-avmoto-gray font-medium placeholder:text-gray-400"
                     />
                   </div>
 
@@ -288,7 +288,7 @@ export default function NewCustomerPage() {
                       onChange={(e) => updateUnit(index, 'year', e.target.value)}
                       min="1900"
                       max={new Date().getFullYear() + 1}
-                      className="w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none"
+                      className="w-full px-4 py-2 border-2 border-gray-200 rounded-lg focus:ring-2 focus:ring-avmoto-blue focus:border-avmoto-blue outline-none text-avmoto-gray font-medium placeholder:text-gray-400"
                     />
                   </div>
 
@@ -300,7 +300,7 @@ export default function NewCustomerPage() {
                       type="text"
                       value={unit.plate_number}
                       onChange={(e) => updateUnit(index, 'plate_number', e.target.value.toUpperCase())}
-                      className="w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none"
+                      className="w-full px-4 py-2 border-2 border-gray-200 rounded-lg focus:ring-2 focus:ring-avmoto-blue focus:border-avmoto-blue outline-none text-avmoto-gray font-medium placeholder:text-gray-400"
                     />
                   </div>
                 </div>
