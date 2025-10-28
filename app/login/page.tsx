@@ -40,14 +40,8 @@ export default function LoginPage() {
   }
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-avmoto-gray-dark via-avmoto-gray to-avmoto-gray-dark">
-      {/* Decorative Elements */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute -top-40 -right-40 w-80 h-80 bg-avmoto-blue opacity-10 rounded-full blur-3xl"></div>
-        <div className="absolute -bottom-40 -left-40 w-80 h-80 bg-avmoto-blue opacity-10 rounded-full blur-3xl"></div>
-      </div>
-
-      <div className="relative w-full max-w-md p-8 space-y-8 bg-white rounded-2xl shadow-2xl">
+    <div className="min-h-screen flex items-center justify-center bg-avmoto-gray">
+      <div className="w-full max-w-md p-8 space-y-8 bg-white rounded-2xl shadow-2xl">
         {/* Logo/Brand */}
         <div className="text-center space-y-2">
           <div className="flex items-center justify-center mb-4">

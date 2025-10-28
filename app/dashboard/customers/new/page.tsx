@@ -120,14 +120,14 @@ export default function NewCustomerPage() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 to-slate-100">
+    <div className="min-h-screen bg-gray-50">
       {/* Header */}
-      <header className="bg-white shadow-sm">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
-          <Link href="/dashboard/customers" className="text-blue-600 hover:text-blue-700 text-sm font-medium mb-2 inline-block">
+      <header className="bg-gradient-to-r from-avmoto-blue to-avmoto-blue-dark shadow-md">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+          <Link href="/dashboard/customers" className="text-white/80 hover:text-white text-sm font-medium mb-2 inline-block transition-colors">
             ← Back to Customer Management
           </Link>
-          <h1 className="text-2xl font-bold text-slate-900">New Customer</h1>
+          <h1 className="text-3xl font-bold text-white">New Customer</h1>
         </div>
       </header>
 
@@ -232,7 +232,7 @@ export default function NewCustomerPage() {
               <button
                 type="button"
                 onClick={addUnit}
-                className="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white text-sm font-medium rounded-lg transition-colors"
+                className="px-4 py-2 bg-gradient-to-r from-avmoto-blue to-avmoto-blue-dark hover:from-avmoto-blue-dark hover:to-avmoto-blue text-white text-sm font-bold rounded-lg transition-all shadow-md"
               >
                 + Add Unit
               </button>
@@ -319,7 +319,7 @@ export default function NewCustomerPage() {
             <button
               type="submit"
               disabled={loading}
-              className="px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-lg transition-colors disabled:bg-slate-400 disabled:cursor-not-allowed"
+              className="px-6 py-3 bg-gradient-to-r from-avmoto-blue to-avmoto-blue-dark hover:from-avmoto-blue-dark hover:to-avmoto-blue text-white font-bold rounded-lg transition-all shadow-lg disabled:bg-gray-400 disabled:cursor-not-allowed disabled:from-gray-400 disabled:to-gray-400"
             >
               {loading ? 'Creating Customer...' : 'Create Customer'}
             </button>
