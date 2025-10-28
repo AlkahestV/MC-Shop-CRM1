@@ -5,7 +5,9 @@ import { getUserRole } from '@/lib/auth/user-role'
 import EditProfileButton from '@/components/EditProfileButton'
 import DeleteJobButton from '@/components/DeleteJobButton'
 
-export default async function CustomerProfilePage({ params }: { params: { id: string } }) {
+export const dynamic = 'force-dynamic'
+
+export default async function CustomerProfilePage({ params }: { params: Promise<{ id: string }> }) {
   const supabase = await createClient()
   const { data: { user } } = await supabase.auth.getUser()
 
@@ -14,10 +16,11 @@ export default async function CustomerProfilePage({ params }: { params: { id: st
   }
 
   const role = await getUserRole()
+  const { id } = await params
 
   // Get customer profile with jobs
   const { data: profileData, error } = await supabase.rpc('get_customer_profile', {
-    customer_id: params.id
+    customer_id: id
   })
 
   if (error || !profileData) {
