@@ -59,5 +59,21 @@ VALUES ('your-user-id-here', 'admin');
 
 ---
 
+## Troubleshooting
+
+### Customer/Job Creation Fails with RLS Error
+
+If you're getting permission errors when creating customers or jobs, run this fix:
+
+**For existing databases:** Run `supabase/fix_customer_rls.sql` in the SQL Editor
+
+This fix is already included in `schema.sql` for new databases.
+
+**What it does:**
+- Adds a `SECURITY DEFINER` trigger to auto-set `created_by` field
+- Prevents RLS policy failures when the client doesn't provide `created_by`
+
+---
+
 That's it! Your CRM is now live. 🚀
 

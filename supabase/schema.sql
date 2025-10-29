@@ -90,6 +90,40 @@ CREATE POLICY "Admins can delete customers"
   ON public.customers FOR DELETE TO authenticated
   USING (EXISTS (SELECT 1 FROM public.user_roles WHERE id = auth.uid() AND role = 'admin'));
 
+-- Trigger function to auto-set created_by (SECURITY DEFINER to bypass RLS)
+CREATE OR REPLACE FUNCTION public.set_created_by()
+RETURNS trigger
+LANGUAGE plpgsql
+SECURITY DEFINER
+SET search_path = ''
+AS $$
+BEGIN
+  -- If client didn't supply created_by, set it from the JWT-subjected auth.uid()
+  IF NEW.created_by IS NULL THEN
+    NEW.created_by := auth.uid();
+  END IF;
+
+  -- If created_by is supplied but not equal to auth.uid(), override it to enforce ownership
+  -- (This prevents clients from inserting rows for other users)
+  IF NEW.created_by IS DISTINCT FROM auth.uid() THEN
+    NEW.created_by := auth.uid();
+  END IF;
+
+  RETURN NEW;
+END;
+$$;
+
+-- Revoke execute from anon and authenticated to keep function privileged
+REVOKE EXECUTE ON FUNCTION public.set_created_by() FROM anon, authenticated;
+
+-- Create the BEFORE INSERT trigger on customers
+DROP TRIGGER IF EXISTS trg_set_created_by ON public.customers;
+
+CREATE TRIGGER trg_set_created_by
+BEFORE INSERT ON public.customers
+FOR EACH ROW
+EXECUTE FUNCTION public.set_created_by();
+
 -- Indexes
 CREATE INDEX IF NOT EXISTS idx_customers_name ON public.customers(last_name, first_name);
 CREATE INDEX IF NOT EXISTS idx_customers_full_name ON public.customers((lower(first_name || ' ' || last_name)));
@@ -210,6 +244,14 @@ CREATE POLICY "Admins can update job items"
 CREATE POLICY "Admins can delete job items"
   ON public.job_items FOR DELETE TO authenticated
   USING (EXISTS (SELECT 1 FROM public.user_roles WHERE id = auth.uid() AND role = 'admin'));
+
+-- Apply the same created_by trigger to jobs table
+DROP TRIGGER IF EXISTS trg_set_created_by ON public.jobs;
+
+CREATE TRIGGER trg_set_created_by
+BEFORE INSERT ON public.jobs
+FOR EACH ROW
+EXECUTE FUNCTION public.set_created_by();
 
 -- Indexes
 CREATE INDEX IF NOT EXISTS idx_jobs_customer_id ON public.jobs(customer_id);
