@@ -214,7 +214,7 @@ export default function CreateJobPage() {
                   setSelectedUnit('')
                 }}
                 placeholder="Type customer name..."
-                className="w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none"
+                className="w-full px-4 py-2 border-2 border-gray-200 rounded-lg focus:ring-2 focus:ring-avmoto-blue focus:border-avmoto-blue outline-none text-avmoto-gray font-medium placeholder:text-gray-400"
               />
               
               {showDropdown && (
@@ -256,7 +256,7 @@ export default function CreateJobPage() {
                   value={selectedUnit}
                   onChange={(e) => setSelectedUnit(e.target.value)}
                   required
-                  className="w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none"
+                  className="w-full px-4 py-2 border-2 border-gray-200 rounded-lg focus:ring-2 focus:ring-avmoto-blue focus:border-avmoto-blue outline-none text-avmoto-gray font-medium"
                 >
                   <option value="">Select a unit...</option>
                   {customerUnits.map((unit) => (
@@ -285,7 +285,7 @@ export default function CreateJobPage() {
                       value={workDate}
                       onChange={(e) => setWorkDate(e.target.value)}
                       required
-                      className="w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none"
+                      className="w-full px-4 py-2 border-2 border-gray-200 rounded-lg focus:ring-2 focus:ring-avmoto-blue focus:border-avmoto-blue outline-none text-avmoto-gray font-medium"
                     />
                   </div>
 
@@ -300,7 +300,7 @@ export default function CreateJobPage() {
                       value={duration}
                       onChange={(e) => setDuration(e.target.value)}
                       required
-                      className="w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none"
+                      className="w-full px-4 py-2 border-2 border-gray-200 rounded-lg focus:ring-2 focus:ring-avmoto-blue focus:border-avmoto-blue outline-none text-avmoto-gray font-medium placeholder:text-gray-400"
                     />
                   </div>
 
@@ -312,7 +312,7 @@ export default function CreateJobPage() {
                       value={remarks}
                       onChange={(e) => setRemarks(e.target.value)}
                       rows={3}
-                      className="w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none"
+                      className="w-full px-4 py-2 border-2 border-gray-200 rounded-lg focus:ring-2 focus:ring-avmoto-blue focus:border-avmoto-blue outline-none text-avmoto-gray font-medium placeholder:text-gray-400"
                       placeholder="Additional notes or observations..."
                     />
                   </div>
@@ -356,7 +356,7 @@ export default function CreateJobPage() {
                           value={item.description}
                           onChange={(e) => updateJobItem(index, 'description', e.target.value)}
                           rows={3}
-                          className="w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none"
+                          className="w-full px-4 py-2 border-2 border-gray-200 rounded-lg focus:ring-2 focus:ring-avmoto-blue focus:border-avmoto-blue outline-none text-avmoto-gray font-medium placeholder:text-gray-400"
                           placeholder="Describe the work performed..."
                         />
                       </div>
@@ -369,7 +369,7 @@ export default function CreateJobPage() {
                           type="text"
                           value={item.products_used}
                           onChange={(e) => updateJobItem(index, 'products_used', e.target.value)}
-                          className="w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none"
+                          className="w-full px-4 py-2 border-2 border-gray-200 rounded-lg focus:ring-2 focus:ring-avmoto-blue focus:border-avmoto-blue outline-none text-avmoto-gray font-medium placeholder:text-gray-400"
                           placeholder="List products or parts used..."
                         />
                       </div>

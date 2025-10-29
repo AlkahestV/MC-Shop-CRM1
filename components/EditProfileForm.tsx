@@ -91,7 +91,7 @@ export default function EditProfileForm({ customer, units: initialUnits }: Props
                   value={firstName}
                   onChange={(e) => setFirstName(e.target.value)}
                   required
-                  className="w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none"
+                  className="w-full px-4 py-2 border-2 border-gray-200 rounded-lg focus:ring-2 focus:ring-avmoto-blue focus:border-avmoto-blue outline-none text-avmoto-gray font-medium placeholder:text-gray-400"
                 />
               </div>
 
@@ -104,7 +104,7 @@ export default function EditProfileForm({ customer, units: initialUnits }: Props
                   value={lastName}
                   onChange={(e) => setLastName(e.target.value)}
                   required
-                  className="w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none"
+                  className="w-full px-4 py-2 border-2 border-gray-200 rounded-lg focus:ring-2 focus:ring-avmoto-blue focus:border-avmoto-blue outline-none text-avmoto-gray font-medium placeholder:text-gray-400"
                 />
               </div>
 
@@ -117,7 +117,7 @@ export default function EditProfileForm({ customer, units: initialUnits }: Props
                   value={middleInitial}
                   onChange={(e) => setMiddleInitial(e.target.value.slice(0, 1))}
                   maxLength={1}
-                  className="w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none"
+                  className="w-full px-4 py-2 border-2 border-gray-200 rounded-lg focus:ring-2 focus:ring-avmoto-blue focus:border-avmoto-blue outline-none text-avmoto-gray font-medium placeholder:text-gray-400"
                 />
               </div>
 
@@ -130,7 +130,7 @@ export default function EditProfileForm({ customer, units: initialUnits }: Props
                   value={phoneNumber}
                   onChange={(e) => setPhoneNumber(e.target.value)}
                   required
-                  className="w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none"
+                  className="w-full px-4 py-2 border-2 border-gray-200 rounded-lg focus:ring-2 focus:ring-avmoto-blue focus:border-avmoto-blue outline-none text-avmoto-gray font-medium placeholder:text-gray-400"
                 />
               </div>
 
@@ -143,7 +143,7 @@ export default function EditProfileForm({ customer, units: initialUnits }: Props
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   required
-                  className="w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none"
+                  className="w-full px-4 py-2 border-2 border-gray-200 rounded-lg focus:ring-2 focus:ring-avmoto-blue focus:border-avmoto-blue outline-none text-avmoto-gray font-medium placeholder:text-gray-400"
                 />
               </div>
 
@@ -156,7 +156,7 @@ export default function EditProfileForm({ customer, units: initialUnits }: Props
                   onChange={(e) => setAddress(e.target.value)}
                   required
                   rows={3}
-                  className="w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none"
+                  className="w-full px-4 py-2 border-2 border-gray-200 rounded-lg focus:ring-2 focus:ring-avmoto-blue focus:border-avmoto-blue outline-none text-avmoto-gray font-medium placeholder:text-gray-400"
                 />
               </div>
             </div>
