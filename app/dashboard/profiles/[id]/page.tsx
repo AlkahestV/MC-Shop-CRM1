@@ -19,15 +19,15 @@ export default async function CustomerProfilePage({ params }: { params: Promise<
   const { id } = await params
 
   // Get customer profile with jobs
-  const { data: profileData, error } = await supabase.rpc('get_customer_profile', {
+  const { data: profile, error } = await supabase.rpc('get_customer_profile', {
     customer_id: id
   })
 
-  if (error || !profileData) {
+  if (error || !profile) {
     notFound()
   }
 
-  const profile = JSON.parse(profileData)
+  // Supabase automatically parses JSON, so profile is already an object
   const customer = profile.customer
   const units = profile.units || []
   const jobs = profile.jobs || []

@@ -20,6 +20,27 @@ CREATE TABLE IF NOT EXISTS public.user_roles (
 -- Enable RLS
 ALTER TABLE public.user_roles ENABLE ROW LEVEL SECURITY;
 
+-- ============================================
+-- HELPER FUNCTION: Check if user is admin
+-- ============================================
+-- This function prevents infinite recursion in RLS policies
+-- by using SECURITY DEFINER to bypass RLS when checking roles
+CREATE OR REPLACE FUNCTION public.is_user_admin(p_user uuid)
+RETURNS boolean
+LANGUAGE sql
+SECURITY DEFINER
+STABLE
+SET search_path = ''
+AS $$
+  SELECT EXISTS (
+    SELECT 1 FROM public.user_roles ur
+    WHERE ur.id = p_user AND ur.role = 'admin'
+  );
+$$;
+
+-- Restrict direct execution by public roles
+REVOKE EXECUTE ON FUNCTION public.is_user_admin(uuid) FROM anon, authenticated;
+
 -- RLS Policies
 CREATE POLICY "Users can view their own role" 
   ON public.user_roles FOR SELECT TO authenticated
@@ -27,20 +48,20 @@ CREATE POLICY "Users can view their own role"
 
 CREATE POLICY "Admins can view all roles"
   ON public.user_roles FOR SELECT TO authenticated
-  USING (EXISTS (SELECT 1 FROM public.user_roles WHERE id = auth.uid() AND role = 'admin'));
+  USING (public.is_user_admin(auth.uid()));
 
 CREATE POLICY "Admins can insert roles"
   ON public.user_roles FOR INSERT TO authenticated
-  WITH CHECK (EXISTS (SELECT 1 FROM public.user_roles WHERE id = auth.uid() AND role = 'admin'));
+  WITH CHECK (public.is_user_admin(auth.uid()));
 
 CREATE POLICY "Admins can update roles"
   ON public.user_roles FOR UPDATE TO authenticated
-  USING (EXISTS (SELECT 1 FROM public.user_roles WHERE id = auth.uid() AND role = 'admin') AND id != auth.uid())
-  WITH CHECK (EXISTS (SELECT 1 FROM public.user_roles WHERE id = auth.uid() AND role = 'admin'));
+  USING (public.is_user_admin(auth.uid()) AND id != auth.uid())
+  WITH CHECK (public.is_user_admin(auth.uid()));
 
 CREATE POLICY "Admins can delete roles"
   ON public.user_roles FOR DELETE TO authenticated
-  USING (EXISTS (SELECT 1 FROM public.user_roles WHERE id = auth.uid() AND role = 'admin') AND id != auth.uid());
+  USING (public.is_user_admin(auth.uid()) AND id != auth.uid());
 
 -- Indexes
 CREATE INDEX IF NOT EXISTS idx_user_roles_role ON public.user_roles(role);
@@ -83,12 +104,12 @@ CREATE POLICY "Authenticated users can create customers"
 
 CREATE POLICY "Admins can update customers"
   ON public.customers FOR UPDATE TO authenticated
-  USING (EXISTS (SELECT 1 FROM public.user_roles WHERE id = auth.uid() AND role = 'admin'))
-  WITH CHECK (EXISTS (SELECT 1 FROM public.user_roles WHERE id = auth.uid() AND role = 'admin'));
+  USING (public.is_user_admin(auth.uid()))
+  WITH CHECK (public.is_user_admin(auth.uid()));
 
 CREATE POLICY "Admins can delete customers"
   ON public.customers FOR DELETE TO authenticated
-  USING (EXISTS (SELECT 1 FROM public.user_roles WHERE id = auth.uid() AND role = 'admin'));
+  USING (public.is_user_admin(auth.uid()));
 
 -- Trigger function to auto-set created_by (SECURITY DEFINER to bypass RLS)
 CREATE OR REPLACE FUNCTION public.set_created_by()
@@ -167,12 +188,12 @@ CREATE POLICY "Authenticated users can create units"
 
 CREATE POLICY "Admins can update units"
   ON public.units FOR UPDATE TO authenticated
-  USING (EXISTS (SELECT 1 FROM public.user_roles WHERE id = auth.uid() AND role = 'admin'))
-  WITH CHECK (EXISTS (SELECT 1 FROM public.user_roles WHERE id = auth.uid() AND role = 'admin'));
+  USING (public.is_user_admin(auth.uid()))
+  WITH CHECK (public.is_user_admin(auth.uid()));
 
 CREATE POLICY "Admins can delete units"
   ON public.units FOR DELETE TO authenticated
-  USING (EXISTS (SELECT 1 FROM public.user_roles WHERE id = auth.uid() AND role = 'admin'));
+  USING (public.is_user_admin(auth.uid()));
 
 -- Indexes
 CREATE INDEX IF NOT EXISTS idx_units_customer_id ON public.units(customer_id);
@@ -222,12 +243,12 @@ CREATE POLICY "Authenticated users can create jobs"
 
 CREATE POLICY "Admins can update jobs"
   ON public.jobs FOR UPDATE TO authenticated
-  USING (EXISTS (SELECT 1 FROM public.user_roles WHERE id = auth.uid() AND role = 'admin'))
-  WITH CHECK (EXISTS (SELECT 1 FROM public.user_roles WHERE id = auth.uid() AND role = 'admin'));
+  USING (public.is_user_admin(auth.uid()))
+  WITH CHECK (public.is_user_admin(auth.uid()));
 
 CREATE POLICY "Admins can delete jobs"
   ON public.jobs FOR DELETE TO authenticated
-  USING (EXISTS (SELECT 1 FROM public.user_roles WHERE id = auth.uid() AND role = 'admin'));
+  USING (public.is_user_admin(auth.uid()));
 
 -- RLS Policies for job_items
 CREATE POLICY "Authenticated users can view all job items"
@@ -238,12 +259,12 @@ CREATE POLICY "Authenticated users can create job items"
 
 CREATE POLICY "Admins can update job items"
   ON public.job_items FOR UPDATE TO authenticated
-  USING (EXISTS (SELECT 1 FROM public.user_roles WHERE id = auth.uid() AND role = 'admin'))
-  WITH CHECK (EXISTS (SELECT 1 FROM public.user_roles WHERE id = auth.uid() AND role = 'admin'));
+  USING (public.is_user_admin(auth.uid()))
+  WITH CHECK (public.is_user_admin(auth.uid()));
 
 CREATE POLICY "Admins can delete job items"
   ON public.job_items FOR DELETE TO authenticated
-  USING (EXISTS (SELECT 1 FROM public.user_roles WHERE id = auth.uid() AND role = 'admin'));
+  USING (public.is_user_admin(auth.uid()));
 
 -- Apply the same created_by trigger to jobs table
 DROP TRIGGER IF EXISTS trg_set_created_by ON public.jobs;
